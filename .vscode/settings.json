@@ -1,0 +1,17 @@
+{
+  "workbench.iconTheme": "material-icon-theme",
+  "files.eol": "\n",
+  "eslint.format.enable": true,
+  "[vue]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "stylelint.validate": [
+    "css", "vue"
+  ]
+}
