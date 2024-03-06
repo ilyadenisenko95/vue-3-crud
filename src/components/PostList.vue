@@ -14,14 +14,17 @@ defineProps({
       <p class="posts__info-text">
         {{ post.body }}
       </p>
-      <div class="posts__info-id">user id: 1</div>
+      <div class="posts__info-id">user id: {{ post.id }}</div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
   .posts {
+    position: relative;
     display: flex;
+    width: 49%;
+    margin-bottom: 20px;
 
     &__info {
       padding: 17px;
@@ -35,19 +38,20 @@ defineProps({
       }
 
         &__info-id {
-          display: flex;
-          justify-content: flex-end;
+          position: absolute;
+          right: 20px;
+          bottom: 20px;
           font-size: 13px;
           line-height: 16px;
           font-weight: 400;
         }
 
-        &__info-text {
-          margin: 16px 0;
-          font-size: 14px;
-          line-height: 20px;
-          font-weight: 400;
-        }
+          &__info-text {
+            margin: 16px 0;
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+          }
   }
 
 </style>

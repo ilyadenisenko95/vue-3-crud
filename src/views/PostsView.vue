@@ -1,44 +1,69 @@
 <script setup>
-import { fetchPost } from '@/api/posts.js';
+import { fetchPosts } from '@/api/posts.js';
 import PostList from '@/components/PostList.vue';
+import { onMounted, ref } from 'vue';
 
-// const consoleLogPost = async (id) => {
-//   const post = await fetchPost(id);
-//   console.log(post);
-// };
-// consoleLogPost(1);
-// consoleLogPost(2);
-// consoleLogPost(15);
 
-const posts = [
-  {id: 1, title: 'Vue.js', body: 'Описание поста'},
-  {id: 2, title: 'Vue.js1', body: 'Описание поста1'},
-  {id: 3, title: 'Vue.js2', body: 'Описание поста2'},
+const posts = ref([]);
+const isPostsLoading = ref(false);
 
-];
+onMounted(async () => {
+  isPostsLoading.value = true;
+  setTimeout(async () => {
+    posts.value = await fetchPosts(0, 4);
+    isPostsLoading.value = false;
+
+  }, 500);
+
+
+});
+
+
+let postStartNumber = 4;
+let postEndNumber = 8;
+const postPage = ref(2);
+const loadPosts = async () => {
+  setTimeout(async () => {
+    const loadPost =  await fetchPosts(postStartNumber, postEndNumber);
+    posts.value = [...posts.value, ...loadPost];
+    console.log(loadPost);
+    postStartNumber += 4;
+    postEndNumber += 4;
+    postPage.value += 1;
+    console.log(postPage);
+  }, 500);
+};
+
+
+
 </script>
 
 <template>
   <h1>Получение списка всех постов</h1>
   <div>
-    <PostList :posts="posts" />
+    <PostList
+      :posts="posts"
+      v-if="!isPostsLoading"
+    />
+    <el-skeleton v-else :rows="5" animated />
   </div>
-  <el-button type="primary">Загрузить страницу 2</el-button>
+  <el-button @click="loadPosts" type="primary">Загрузить страницу {{ postPage }}</el-button>
 </template>
 
 
 <style lang="scss" scoped>
   div {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
-    grid-auto-rows: minmax(186px, auto);
-  }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
 
-  .el-button {
-    display: block;
-    margin-top: 20px;
-    margin-right: auto;
-    margin-left: auto;
+
+    .el-button {
+      display: block;
+      margin-right: auto;
+      margin-bottom: 20px;
+      margin-left: auto;
+    }
   }
 </style>
