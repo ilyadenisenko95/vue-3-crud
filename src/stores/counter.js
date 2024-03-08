@@ -1,12 +1,44 @@
 import { defineStore } from 'pinia';
-import { ref, computed } from 'vue';
+// import { ref, computed } from 'vue';
 
-export const useCounterStore = defineStore('counter', () => {
-  const count = ref(0);
-  const doubleCount = computed(() => count.value * 2);
-  function increment() {
-    count.value++;
-  }
+export const useCounter = defineStore('counter', {
+  state: () => ({
+    todos: [
+      {
+        id: 4,
+        title: 'Проверить почту',
+        isDone: false,
+        isFavorite: false,
+      },
+      {
+        id: 3,
+        title: 'Сделать кофе',
+        isDone: true,
+        isFavorite: true,
+      },
+      {
+        id: 2,
+        title: 'Почистить зубы',
+        isDone: true,
+        isFavorite: false,
+      },
+      {
+        id: 1,
+        title: 'Проснуться',
+        isDone: true,
+        isFavorite: false,
+      },
+    ],
+  }),
+  getters: {
+    // myFilter() {
+    //   return this.todos.filter((el) => el.isDone);
+    // },
+  },
 
-  return { count, doubleCount, increment };
+  actions: {
+    deleteTodos(id) {
+      this.todos = this.todos.filter(el => el.id !== id);
+    },
+  },
 });

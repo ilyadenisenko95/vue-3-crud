@@ -1,20 +1,45 @@
 <script setup>
 
+defineProps({
+  todo: {
+    type: Object,
+    required: true,
+    default: () => {},
+  },
+});
+
+defineEmits(['someMyEvent']);
 
 </script>
 
 <template>
   <div class="page-layout__task task">
     <div class="task__top">
-      <h4>Проверить почту</h4>
+      <h2
+        v-if="!todo.isDone"
+      >
+        {{ todo.title }}
+      </h2>
+      <h2
+        v-else
+        style="color:#90EE90;"
+      >
+        {{ todo.title }}
+      </h2>
       <div class="task__status">
-        <img src="../assets/icons/star.svg" alt="star">
+        <img v-if="!todo.isFavorite" src="../assets/icons/star.svg" alt="star">
+        <img v-else src="../assets/icons/StarFull.svg" alt="star">
       </div>
     </div>
-
     <div class="task__fix">
       <div class="task__fix-text">Редактировать</div>
-      <el-button type="danger">Удалить</el-button>
+
+      <el-button
+        @click="$emit('someMyEvent')"
+        type="danger"
+      >
+        Удалить
+      </el-button>
     </div>
   </div>
 </template>
@@ -24,11 +49,11 @@
     position: relative;
     width: 500px;
     min-height: 116px;
-    margin-top: 20px;
     margin-right: auto;
+    margin-bottom: 20px;
     margin-left: auto;
     padding: 17px;
-    border: 1px solid rgb(170, 170, 170);
+    border: 1px solid rgb(170 170 170);
 
       &__top {
         display: flex;
@@ -38,7 +63,7 @@
         &__status {
           display: flex;
           justify-content: center;
-          border: 1px solid rgb(220, 223, 230);
+          border: 1px solid rgb(220 223 230);
           border-radius: 4px;
         }
 
@@ -61,7 +86,7 @@
               }
   }
 
-  h4 {
+  h2 {
     font-size: 18px;
     font-weight: 700;
   }
