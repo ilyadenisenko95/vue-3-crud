@@ -44,6 +44,7 @@ defineEmits(['someMyEvent']);
   </div>
 </template>
 
+
 <style lang="scss" scoped>
   .task {
     position: relative;
