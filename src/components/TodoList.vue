@@ -1,4 +1,11 @@
 <script setup>
+import TodoDialogDelete from '@/components/TodoDialogDelete.vue';
+import { useCounter } from '@/stores/counter';
+import { ElMessageBox } from 'element-plus';
+import { ref } from 'vue';
+
+
+const counter = useCounter();
 
 defineProps({
   todo: {
@@ -8,12 +15,25 @@ defineProps({
   },
 });
 
-defineEmits(['someMyEvent']);
+
+
+// Взаимодействие с модальным окном удаления
+const dialogVisible = ref(false);
+
+// const handleClose = (done: () => void) => {
+//   ElMessageBox.confirm('Are you sure to close this dialog?')
+//     .then(() => {
+//       done()
+//     })
+//     .catch(() => {
+//       // catch error
+//     })
+// }
 
 </script>
 
 <template>
-  <div class="page-layout__task task">
+  <div class="page-layout__task task" @click="counter.changeMainTodos(todos.id)">
     <div class="task__top">
       <h2
         v-if="!todo.isDone"
@@ -26,22 +46,35 @@ defineEmits(['someMyEvent']);
       >
         {{ todo.title }}
       </h2>
-      <div class="task__status">
-        <img v-if="!todo.isFavorite" src="../assets/icons/star.svg" alt="star">
-        <img v-else src="../assets/icons/StarFull.svg" alt="star">
+      <div class="task__status" @click="counter.changeFavorite(todo.id)">
+        <img
+          v-if="!todo.isFavorite"
+          src="../assets/icons/star.svg"
+          alt="star"
+        >
+        <img
+          v-else
+          src="../assets/icons/StarFull.svg"
+          alt="star"
+        >
       </div>
     </div>
     <div class="task__fix">
       <div class="task__fix-text">Редактировать</div>
 
       <el-button
-        @click="$emit('someMyEvent')"
+        @click="dialogVisible = true"
         type="danger"
       >
         Удалить
       </el-button>
     </div>
   </div>
+  <TodoDialogDelete
+    v-model="dialogVisible"
+    @delete-post="counter.deleteTodos(todo.id)"
+    @close-dialog="dialogVisible = false"
+  />
 </template>
 
 
@@ -95,4 +128,8 @@ defineEmits(['someMyEvent']);
   img {
     padding: 7px;
   }
+
+  .el-button {
+  padding: 9px 20px;
+}
 </style>

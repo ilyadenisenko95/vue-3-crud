@@ -1,13 +1,29 @@
 <script setup>
+import TodoDialogAdd from '@/components/TodoDialogAdd.vue';
 import TodoList from '@/components/TodoList.vue';
 import { useCounter } from '@/stores/counter';
+import { ref } from 'vue';
+
+
 
 const counter = useCounter();
+
+// Взаимодействие с модальным окном добавления
+
+const createNewTodo = ref(false);
+
+
+
 </script>
 
 <template>
   <h1>CRUD задачи</h1>
-  <el-button type="primary">Добавить задачу</el-button>
+  <el-button
+    @click="createNewTodo = true"
+    type="primary"
+  >
+    Добавить задачу
+  </el-button>
   <div class="page-layout__add">
     <div class="page-layout__add-checkbox">
       <el-checkbox v-model="checked3" label="Выполнено" border />
@@ -19,7 +35,11 @@ const counter = useCounter();
     v-for="todo in counter.todos"
     :key="todo.id"
     :todo="todo"
-    @some-my-event=" counter.deleteTodos(todo.id)"
+  />
+
+  <TodoDialogAdd
+    @close-dialog="createNewTodo = false"
+    v-model="createNewTodo"
   />
 </template>
 

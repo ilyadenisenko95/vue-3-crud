@@ -40,5 +40,27 @@ export const useCounter = defineStore('counter', {
     deleteTodos(id) {
       this.todos = this.todos.filter(el => el.id !== id);
     },
+
+    changeFavorite(id) {
+      const todo = this.todos.find((el) => el.id === id);
+      if(todo.isFavorite === false){
+        todo.isFavorite = true;
+      }
+      else{
+        todo.isFavorite = false;
+      }
+    },
+
+    changeMainTodos(id) {
+      const target = this.todos.find((el) => el.id === id);
+      if(todos.isDone === false){
+        todos.isDone = true;
+      }
+      else{
+        todos.isDone = false;
+      }
+    },
   },
+
+
 });
