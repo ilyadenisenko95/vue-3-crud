@@ -18,18 +18,12 @@ const createNewTodo = ref(false);
 
 <template>
   <h1>CRUD задачи</h1>
-  <el-button
-    @click="createNewTodo = true"
-    type="primary"
-  >
-    Добавить задачу
-  </el-button>
   <div class="page-layout__add">
     <div class="page-layout__add-checkbox">
-      <el-checkbox v-model="checked3" label="Выполнено" border />
-      <el-checkbox v-model="checked4" label="Избранное" border />
+      <el-checkbox label="Выполнено" border />
+      <el-checkbox label="Избранное" border />
     </div>
-    <el-button type="primary">Добавить задачу</el-button>
+    <el-button type="primary" @click="createNewTodo = true">Добавить задачу</el-button>
   </div>
   <TodoList
     v-for="todo in counter.todos"
@@ -57,7 +51,7 @@ const createNewTodo = ref(false);
   justify-content: space-between;
   width: 500px;
   height: 54px;
-  margin: 20px auto;
+  margin: 0 auto;
   padding: 11px;
   border: 1px solid rgb(170 170 170);
 

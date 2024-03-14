@@ -33,7 +33,7 @@ const dialogVisible = ref(false);
 </script>
 
 <template>
-  <div class="page-layout__task task" @click="counter.changeMainTodos(todos.id)">
+  <div class="page-layout__task task" @click="counter.changePostDone(todo.id)">
     <div class="task__top">
       <h2
         v-if="!todo.isDone"
@@ -46,7 +46,7 @@ const dialogVisible = ref(false);
       >
         {{ todo.title }}
       </h2>
-      <div class="task__status" @click="counter.changeFavorite(todo.id)">
+      <div class="task__status" @click.stop="counter.changeFavorite(todo.id)">
         <img
           v-if="!todo.isFavorite"
           src="../assets/icons/star.svg"
@@ -60,10 +60,16 @@ const dialogVisible = ref(false);
       </div>
     </div>
     <div class="task__fix">
-      <div class="task__fix-text">Редактировать</div>
+      <RouterLink
+        class="task__fix-text"
+        @click.stop
+        :to="{ name: 'tasksdetails' }"
+      >
+        Редактировать
+      </RouterLink>
 
       <el-button
-        @click="dialogVisible = true"
+        @click.stop="dialogVisible = true"
         type="danger"
       >
         Удалить
@@ -83,8 +89,8 @@ const dialogVisible = ref(false);
     position: relative;
     width: 500px;
     min-height: 116px;
+    margin: 20px auto;
     margin-right: auto;
-    margin-bottom: 20px;
     margin-left: auto;
     padding: 17px;
     border: 1px solid rgb(170 170 170);
@@ -112,6 +118,8 @@ const dialogVisible = ref(false);
               font-size: 16px;
               line-height: 18.4px;
               font-weight: 400;
+              text-decoration: none;
+              color: rgb(51 51 51);
               cursor: pointer;
             }
 

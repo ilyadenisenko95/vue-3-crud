@@ -29,6 +29,7 @@ export const useCounter = defineStore('counter', {
         isFavorite: false,
       },
     ],
+    activeTab: 2,
   }),
   getters: {
     // myFilter() {
@@ -51,15 +52,22 @@ export const useCounter = defineStore('counter', {
       }
     },
 
-    changeMainTodos(id) {
-      const target = this.todos.find((el) => el.id === id);
-      if(todos.isDone === false){
-        todos.isDone = true;
+    changePostDone(id) {
+      const todoDone = this.todos.find((el) => el.id === id);
+      if(todoDone.isDone === false){
+        todoDone.isDone = true;
       }
       else{
-        todos.isDone = false;
+        todoDone.isDone = false;
       }
     },
+
+    changeActiveTab(id) {
+      this.activeTab=id;
+    },
+
+
+
   },
 
 

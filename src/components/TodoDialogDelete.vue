@@ -7,7 +7,6 @@ defineEmits(['deletePost', 'closeDialog']);
     title="Удалить задачу 'Проверить
     почту'"
     width="588.5px"
-    :before-close="handleClose"
   >
     <template #footer>
       <div class="dialog-footer">

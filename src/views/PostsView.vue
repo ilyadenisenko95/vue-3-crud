@@ -1,7 +1,9 @@
 <script setup>
 import { fetchPosts } from '@/api/posts.js';
 import PostList from '@/components/PostList.vue';
+import { useCounter } from '@/stores/counter';
 import { onMounted, ref } from 'vue';
+const counter = useCounter();
 
 
 const posts = ref([]);
@@ -26,11 +28,9 @@ const loadPosts = async () => {
   setTimeout(async () => {
     const loadPost =  await fetchPosts(postStartNumber, postEndNumber);
     posts.value = [...posts.value, ...loadPost];
-    console.log(loadPost);
     postStartNumber += 4;
     postEndNumber += 4;
     postPage.value += 1;
-    console.log(postPage);
   }, 500);
 };
 

@@ -1,4 +1,6 @@
 <script setup>
+import { useCounter } from '@/stores/counter';
+const counter = useCounter();
 
 </script>
 
@@ -6,8 +8,20 @@
   <div class="header">
     <h3>Vue 3 CRUD app</h3>
     <ul>
-      <li>Посты</li>
-      <li>Задачи</li>
+      <router-link
+        class="header-router"
+        :to="{ name: 'post' }"
+        :class="{ active: $route.name === 'post' }"
+      >
+        Посты
+      </router-link>
+      <router-link
+        class="header-router"
+        :to="{ name: 'todo' }"
+        :class="{ active: $route.name === 'todo' }"
+      >
+        Задачи
+      </router-link>
     </ul>
   </div>
 </template>
@@ -19,30 +33,35 @@
   justify-content: space-between;
   height: 50px;
   padding: 0 220px;
-  background: rgb(255, 255, 255);
-  box-shadow: 0px 2px 15px 0px rgba(100, 100, 111, 0.2);
+  background: rgb(255 255 255);
+  box-shadow: 0 2px 15px 0 rgb(100 100 111 / 0.2);
 
-    h3 {
+    &-router {
+      font-size: 15px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .active {
+      color: rgb(0 0 139);
+      border-bottom: 1px solid rgb(0 0 139);
+    }
+  }
+
+  h3 {
       font-size: 15px;
     }
 
-      ul {
-        display: flex;
-        justify-content: space-between;
-        list-style-type: none;
-        min-width: 128px;
-        padding: 0;
-      }
+  ul {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    min-width: 128px;
+    padding: 0;
+  }
 
-        li {
-          font-size: 15px;
-          cursor: pointer;
-        }
+  li:hover {
+    color: rgb(0 0 139);
+    }
 
-        li:active {
-          color: rgb(0, 0, 139);
-          border-bottom: 1px solid rgb(0, 0, 139);
-        }
-
-}
 </style>

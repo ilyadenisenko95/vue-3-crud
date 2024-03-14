@@ -7,11 +7,10 @@ defineEmits(['deletePost', 'closeDialog']);
   <el-dialog
     title="Создать задачу"
     width="588.5px"
-    :before-close="handleClose"
   >
     <template #footer>
       <input class="modal__add-input" type="text" placeholder="Название">
-      <el-checkbox class="modal__add-checkbox" v-model="checked4" label="Избранное" />
+      <el-checkbox class="modal__add-checkbox" label="Избранное" />
       <div class="dialog-footer">
         <el-button type="primary">Создать</el-button>
         <el-button @click="$emit('closeDialog')" type="cancel">Отмена</el-button>
