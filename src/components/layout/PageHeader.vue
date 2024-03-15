@@ -1,6 +1,5 @@
 <script setup>
-import { useCounter } from '@/stores/counter';
-const counter = useCounter();
+
 
 </script>
 

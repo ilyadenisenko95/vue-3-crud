@@ -29,7 +29,6 @@ export const useCounter = defineStore('counter', {
         isFavorite: false,
       },
     ],
-    activeTab: 2,
   }),
   getters: {
     // myFilter() {
