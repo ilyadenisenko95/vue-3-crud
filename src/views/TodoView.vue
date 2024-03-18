@@ -23,7 +23,12 @@ const createNewTodo = ref(false);
       <el-checkbox label="Выполнено" border />
       <el-checkbox label="Избранное" border />
     </div>
-    <el-button type="primary" @click="createNewTodo = true">Добавить задачу</el-button>
+    <el-button
+      type="primary"
+      @click="createNewTodo = true"
+    >
+      Добавить задачу
+    </el-button>
   </div>
   <TodoList
     v-for="todo in counter.todos"

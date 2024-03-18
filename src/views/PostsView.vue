@@ -8,7 +8,6 @@ const counter = useCounter();
 
 const posts = ref([]);
 const isPostsLoading = ref(false);
-const delayButton= ref(false);
 onMounted(async () => {
   isPostsLoading.value = true;
   setTimeout(async () => {
@@ -19,13 +18,13 @@ onMounted(async () => {
 
 });
 
-
+const delayButton= ref(false);
 let postStartNumber = 4;
 let postEndNumber = 8;
 const postPage = ref(2);
 const loadPosts = async () => {
+  delayButton.value = true;
   setTimeout(async () => {
-    delayButton.value = true;
     const loadPost =  await fetchPosts(postStartNumber, postEndNumber);
     posts.value = [...posts.value, ...loadPost];
     postStartNumber += 4;
@@ -68,9 +67,7 @@ const loadPosts = async () => {
 
     .el-button {
       display: block;
-      margin-right: auto;
-      margin-bottom: 20px;
-      margin-left: auto;
+      margin: 20px auto;
     }
   }
 </style>

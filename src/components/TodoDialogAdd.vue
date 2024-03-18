@@ -1,6 +1,7 @@
 <script setup>
 defineEmits(['deletePost', 'closeDialog']);
 
+
 </script>
 
 <template>
@@ -12,7 +13,12 @@ defineEmits(['deletePost', 'closeDialog']);
       <input class="modal__add-input" type="text" placeholder="Название">
       <el-checkbox class="modal__add-checkbox" label="Избранное" />
       <div class="dialog-footer">
-        <el-button type="primary">Создать</el-button>
+        <el-button
+          type="primary"
+          @click="$emit('closeDialog')"
+        >
+          Создать
+        </el-button>
         <el-button @click="$emit('closeDialog')" type="cancel">Отмена</el-button>
       </div>
     </template>

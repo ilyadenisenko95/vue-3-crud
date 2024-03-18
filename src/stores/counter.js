@@ -61,10 +61,6 @@ export const useCounter = defineStore('counter', {
       }
     },
 
-    changeActiveTab(id) {
-      this.activeTab=id;
-    },
-
 
 
   },

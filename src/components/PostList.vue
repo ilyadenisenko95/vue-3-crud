@@ -19,7 +19,6 @@ defineProps({
   </div>
 </template>
 
-
 <style lang="scss" scoped>
   .posts {
     position: relative;

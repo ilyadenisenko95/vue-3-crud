@@ -1,5 +1,10 @@
 <script setup>
+import { useCounter } from '@/stores/counter';
+import { ref } from 'vue';
 
+const counter = useCounter();
+
+// const input = ref('hello');
 </script>
 
 
@@ -9,7 +14,7 @@
     <el-input
       class="todos-detail__input"
       v-model="input"
-      placeholder="Проверить почту"
+      placeholder=""
     />
     <el-checkbox
       class="todos-detail__checkbox"
@@ -25,7 +30,11 @@
     />
     <div class="todos-detail__control">
       <el-button type="primary">Сохранить</el-button>
-      <el-button type="danger">Удалить</el-button>
+      <el-button
+        type="danger"
+      >
+        Удалить
+      </el-button>
     </div>
   </div>
 </template>
