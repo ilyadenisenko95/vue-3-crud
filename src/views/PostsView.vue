@@ -9,10 +9,8 @@ const counter = useCounter();
 const posts = ref([]);
 const isPostsLoading = ref(false);
 onMounted(async () => {
-  isPostsLoading.value = true;
   setTimeout(async () => {
     posts.value = await fetchPosts(0, 4);
-    isPostsLoading.value = false;
   }, 500);
 
 
@@ -23,6 +21,7 @@ let postStartNumber = 4;
 let postEndNumber = 8;
 const postPage = ref(2);
 const loadPosts = async () => {
+  isPostsLoading.value = true;
   delayButton.value = true;
   setTimeout(async () => {
     const loadPost =  await fetchPosts(postStartNumber, postEndNumber);
@@ -31,7 +30,8 @@ const loadPosts = async () => {
     postEndNumber += 4;
     postPage.value += 1;
     delayButton.value = false;
-  }, 500);
+    isPostsLoading.value = false;
+  }, 1000);
 };
 
 
@@ -43,9 +43,8 @@ const loadPosts = async () => {
   <div>
     <PostList
       :posts="posts"
-      v-if="!isPostsLoading"
     />
-    <el-skeleton v-else :rows="5" animated />
+    <el-skeleton v-if="isPostsLoading" :rows="5" animated />
   </div>
   <el-button
     :loading="delayButton"

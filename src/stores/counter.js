@@ -61,6 +61,10 @@ export const useCounter = defineStore('counter', {
       }
     },
 
+    // создание новой задачи
+    addTodo(el) {
+      this.todos.unshift(el);
+    },
 
 
   },
