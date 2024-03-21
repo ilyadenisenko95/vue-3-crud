@@ -4,7 +4,6 @@ import { ref } from 'vue';
 
 const counter = useCounter();
 
-// const input = ref('hello');
 </script>
 
 

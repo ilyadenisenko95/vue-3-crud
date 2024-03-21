@@ -29,8 +29,33 @@ export const useCounter = defineStore('counter', {
         isFavorite: false,
       },
     ],
+    isDoneFilter: false,
+    isFavoriteFilter: false,
   }),
   getters: {
+    filteredTodos() {
+
+      // if (this.isDoneFilter && this.isFavoriteFilter) {
+      //   console.log(123);
+
+      //   return this.todos.filter((el) => {
+      //     el.isFavorite;
+
+      //   });
+      // }
+
+      if (this.isDoneFilter) {
+        return this.todos.filter((el) => el.isDone);
+      }
+      if (this.isFavoriteFilter) {
+        return this.todos.filter((el) => el.isFavorite);
+      }
+
+      return this.todos;
+
+    },
+
+
     // myFilter() {
     //   return this.todos.filter((el) => el.isDone);
     // },

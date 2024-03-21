@@ -1,42 +1,56 @@
 <script setup>
 import { useCounter } from '@/stores/counter';
-import { ref, onBeforeUnmount } from 'vue';
+import { ref } from 'vue';
 
 
 const counter = useCounter();
-const emits = defineEmits(['deletePost', 'closeDialog']);
+const isHasName = ref(true);
 
 // создание новой задачи
-const isFavirite = ref(false);
+const isFavirite = ref(true);
 const inputName = ref('');
 const addTask = () => {
-  counter.addTodo({
-    id: Date.now(),
-    title: inputName.value,
-    isDone: false,
-    isFavorite: isFavirite.value,
-  });
-  inputName.value = '';
-  emits('closeDialog');
-  isFavirite.value = false;
+  if(inputName.value.length > 0){
+    counter.addTodo({
+      id: Date.now(),
+      title: inputName.value,
+      isDone: false,
+      isFavorite: isFavirite.value,
+    });
+    inputName.value = '';
+    isFavirite.value = false;
+    isConfirmCreateOpen.value = false;
+  }
+  else{
+    isHasName.value = false;
+  }
 };
 
-onBeforeUnmount(() => {
-  isFavirite.value = false;
-});
+const isConfirmCreateOpen = ref(false);
 
-const closeFavorite = () => {
-  console.log(123);
+const openDialogCreate = () => {
+  isConfirmCreateOpen.value = true;
+  inputName.value ='';
+  isFavirite.value = false;
+  isHasName.value = true;
+
 };
+
+defineExpose({ openDialogCreate });
+
 </script>
 
 <template>
   <el-dialog
-    @before-close="closeFavorite"
     title="Создать задачу"
     width="588.5px"
+    v-model="isConfirmCreateOpen"
   >
     <template #footer>
+      <span
+        v-if="!isHasName"
+        class="dialog-footer__text"
+      >Пожалуйста, введите название!</span>
       <input
         v-model="inputName"
         class="modal__add-input"
@@ -56,7 +70,7 @@ const closeFavorite = () => {
           Создать
         </el-button>
         <el-button
-          @click="$emit('closeDialog')"
+          @click="isConfirmCreateOpen = false"
           type="cancel"
         >
           Отмена
@@ -69,7 +83,7 @@ const closeFavorite = () => {
 <style lang="scss" scoped>
   input {
     box-sizing: border-box;
-    width: 548.5px;
+    width: 100%;
     height: 32px;
     padding: 8px 11px;
     font-size: 14px;
@@ -82,7 +96,7 @@ const closeFavorite = () => {
 
   .el-checkbox {
     box-sizing: border-box;
-    width: 548.5px;
+    width: 100%;
     height: 32px;
     margin-top: 16px;
     margin-bottom: 40px;
@@ -93,6 +107,17 @@ const closeFavorite = () => {
     color:#606266;
     border: 1px solid rgb(220 223 230);
     border-radius: 4px;
+  }
+
+  span {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 8.5px;
+    font-size: 14px;
+    line-height: 16.1px;
+    font-weight: 400;
+    color: red;
+
   }
 </style>
 

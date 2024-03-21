@@ -9,11 +9,11 @@ const counter = useCounter();
 const posts = ref([]);
 const isPostsLoading = ref(false);
 onMounted(async () => {
+  isPostsLoading.value = true;
   setTimeout(async () => {
     posts.value = await fetchPosts(0, 4);
+    isPostsLoading.value = false;
   }, 500);
-
-
 });
 
 const delayButton= ref(false);
@@ -31,7 +31,7 @@ const loadPosts = async () => {
     postPage.value += 1;
     delayButton.value = false;
     isPostsLoading.value = false;
-  }, 1000);
+  }, 500);
 };
 
 

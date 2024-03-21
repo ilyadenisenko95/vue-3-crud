@@ -1,5 +1,16 @@
 <script setup>
-defineEmits(['deletePost', 'closeDialog']);
+defineEmits(['deletePost']);
+import { ref } from 'vue';
+
+const isConfirmDeleteOpen = ref(false);
+const deleteDialogItem = ref({});
+
+const openDialog = (todo) => {
+  deleteDialogItem.value = todo;
+  isConfirmDeleteOpen.value = true;
+};
+
+defineExpose({ openDialog });
 </script>
 
 <template>
@@ -7,11 +18,12 @@ defineEmits(['deletePost', 'closeDialog']);
     title="Удалить задачу 'Проверить
     почту'"
     width="588.5px"
+    v-model="isConfirmDeleteOpen"
   >
     <template #footer>
       <div class="dialog-footer">
         <el-button type="danger" @click="$emit('deletePost')">Удалить</el-button>
-        <el-button type="primary" @click="$emit('closeDialog')">
+        <el-button type="primary" @click="isConfirmDeleteOpen = false">
           Отмена
         </el-button>
       </div>
@@ -20,9 +32,9 @@ defineEmits(['deletePost', 'closeDialog']);
 </template>
 
 <style lang="scss" scoped>
-  .el-button {
-    width: 268px;
-  }
+.el-button {
+  width: 268px;
+}
 </style>
 
 

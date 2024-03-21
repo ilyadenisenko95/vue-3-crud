@@ -10,9 +10,11 @@ const counter = useCounter();
 
 // Взаимодействие с модальным окном добавления
 
-const createNewTodo = ref(false);
 
-
+const todoDialogCreate = ref(null);
+const openCreateItemDialog = (todo) => {
+  todoDialogCreate.value.openDialogCreate(todo);
+};
 
 </script>
 
@@ -20,26 +22,23 @@ const createNewTodo = ref(false);
   <h1>CRUD задачи</h1>
   <div class="page-layout__add">
     <div class="page-layout__add-checkbox">
-      <el-checkbox label="Выполнено" border />
-      <el-checkbox label="Избранное" border />
+      <el-checkbox label="Выполнено" v-model="counter.isDoneFilter" border />
+      <el-checkbox label="Избранное" v-model="counter.isFavoriteFilter" border />
     </div>
     <el-button
       type="primary"
-      @click="createNewTodo = true"
+      @click="openCreateItemDialog"
     >
       Добавить задачу
     </el-button>
   </div>
   <TodoList
-    v-for="todo in counter.todos"
+    v-for="todo in counter.filteredTodos"
     :key="todo.id"
     :todo="todo"
   />
 
-  <TodoDialogAdd
-    @close-dialog="createNewTodo = false"
-    v-model="createNewTodo"
-  />
+  <TodoDialogAdd ref="todoDialogCreate" />
 </template>
 
 

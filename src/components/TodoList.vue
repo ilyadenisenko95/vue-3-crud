@@ -18,17 +18,11 @@ defineProps({
 
 
 // Взаимодействие с модальным окном удаления
-const dialogVisible = ref(false);
 
-// const handleClose = (done: () => void) => {
-//   ElMessageBox.confirm('Are you sure to close this dialog?')
-//     .then(() => {
-//       done()
-//     })
-//     .catch(() => {
-//       // catch error
-//     })
-// }
+const todoDialogDelete = ref(null);
+const openDeleteItemDialog =(todo) => {
+  todoDialogDelete.value.openDialog(todo);
+};
 
 </script>
 
@@ -69,7 +63,7 @@ const dialogVisible = ref(false);
       </RouterLink>
 
       <el-button
-        @click.stop="dialogVisible = true"
+        @click.stop="openDeleteItemDialog"
         type="danger"
       >
         Удалить
@@ -77,67 +71,66 @@ const dialogVisible = ref(false);
     </div>
   </div>
   <TodoDialogDelete
-    v-model="dialogVisible"
-    @delete-post="counter.deleteTodos(todo.id)"
-    @close-dialog="dialogVisible = false"
+    ref="todoDialogDelete"
+    @deletePost="counter.deleteTodos(todo.id)"
   />
 </template>
 
 
 <style lang="scss" scoped>
-  .task {
-    position: relative;
-    width: 500px;
-    min-height: 116px;
-    margin: 20px auto;
-    margin-right: auto;
-    margin-left: auto;
-    padding: 17px;
-    border: 1px solid rgb(170 170 170);
+.task {
+  position: relative;
+  width: 500px;
+  min-height: 116px;
+  margin: 20px auto;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 17px;
+  border: 1px solid rgb(170 170 170);
 
-      &__top {
-        display: flex;
-        justify-content: space-between;
-      }
-
-        &__status {
-          display: flex;
-          justify-content: center;
-          border: 1px solid rgb(220 223 230);
-          border-radius: 4px;
-        }
-
-          &__fix {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 12px;
-          }
-
-            &__fix-text {
-              font-size: 16px;
-              line-height: 18.4px;
-              font-weight: 400;
-              text-decoration: none;
-              color: rgb(51 51 51);
-              cursor: pointer;
-            }
-
-              &__fix-text:hover {
-                border-bottom: 1px solid #000;
-              }
+  &__top {
+    display: flex;
+    justify-content: space-between;
   }
 
-  h2 {
-    font-size: 18px;
-    font-weight: 700;
+  &__status {
+    display: flex;
+    justify-content: center;
+    border: 1px solid rgb(220 223 230);
+    border-radius: 4px;
   }
 
-  img {
-    padding: 7px;
+  &__fix {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
   }
 
-  .el-button {
+  &__fix-text {
+    font-size: 16px;
+    line-height: 18.4px;
+    font-weight: 400;
+    text-decoration: none;
+    color: rgb(51 51 51);
+    cursor: pointer;
+  }
+
+  &__fix-text:hover {
+    border-bottom: 1px solid #000;
+  }
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+img {
+  padding: 7px;
+}
+
+.el-button {
   padding: 9px 20px;
 }
 </style>
