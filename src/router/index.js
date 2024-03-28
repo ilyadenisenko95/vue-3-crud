@@ -9,21 +9,23 @@ const router = createRouter({
       component: PostsView,
     },
     {
-      path: '/todo',
-      name: 'todo',
+      path: '/task',
+      name: 'task',
       component: () => import('../views/TodoView.vue'),
     },
 
     {
-      path: '/details',
+      path: '/details/:id',
       name: 'postsdetails',
       component: () => import('../views/PostsDetailView.vue'),
     },
     {
-      path: '/task',
-      name: 'tasksdetails',
+      path: '/task/:id',
+      name: 'taskdetails',
       component: () => import('../views/TodosDetailView.vue'),
     },
+
+
   ],
 });
 

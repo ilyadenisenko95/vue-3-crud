@@ -8,7 +8,7 @@ export const useCounter = defineStore('counter', {
         id: 4,
         title: 'Проверить почту',
         isDone: false,
-        isFavorite: false,
+        isFavorite: true,
       },
       {
         id: 3,
@@ -35,18 +35,17 @@ export const useCounter = defineStore('counter', {
   getters: {
     filteredTodos() {
 
-      // if (this.isDoneFilter && this.isFavoriteFilter) {
-      //   console.log(123);
-
-      //   return this.todos.filter((el) => {
-      //     el.isFavorite;
-
-      //   });
-      // }
+      if (this.isDoneFilter & this.isFavoriteFilter) {
+        // return this.todos.filter((el) => el.isDone && el.isFavorite);
+        return this.todos.filter((el) => {
+          return el.isDone && el.isFavorite;
+        });
+      }
 
       if (this.isDoneFilter) {
         return this.todos.filter((el) => el.isDone);
       }
+
       if (this.isFavoriteFilter) {
         return this.todos.filter((el) => el.isFavorite);
       }
@@ -54,11 +53,6 @@ export const useCounter = defineStore('counter', {
       return this.todos;
 
     },
-
-
-    // myFilter() {
-    //   return this.todos.filter((el) => el.isDone);
-    // },
   },
 
   actions: {

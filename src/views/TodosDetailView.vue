@@ -8,7 +8,7 @@ const counter = useCounter();
 
 
 <template>
-  <h1>Детальная страница задачи</h1>
+  <h1>Детальная страница задачи  </h1>
   <div class="todos-detail">
     <el-input
       class="todos-detail__input"
@@ -34,6 +34,7 @@ const counter = useCounter();
       >
         Удалить
       </el-button>
+      <h1>{{ $route.params.id }}</h1>
     </div>
   </div>
 </template>

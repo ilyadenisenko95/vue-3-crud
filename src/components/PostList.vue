@@ -15,7 +15,7 @@ defineProps({
   >
     <RouterLink
       class="posts__link"
-      :to="{ name: 'postsdetails' }"
+      :to="{ name: 'postsdetails', params: { id: post.id } }"
     >
       <div
         class="posts__info"
@@ -24,7 +24,7 @@ defineProps({
         <p class="posts__info-text">
           {{ post.body }}
         </p>
-        <div class="posts__info-id">user id: {{ post.id }}</div>
+        <span class="posts__info-id">user id: {{ post.id }}</span>
       </div>
     </RouterLink>
   </div>
@@ -43,6 +43,7 @@ defineProps({
       }
 
       &__info {
+        height: 100%;
         padding: 17px;
         cursor: pointer;
         border: 1px solid rgb(170 170 170);

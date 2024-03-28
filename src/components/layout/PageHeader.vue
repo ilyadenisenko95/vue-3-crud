@@ -16,7 +16,7 @@
       </router-link>
       <router-link
         class="header-router"
-        :to="{ name: 'todo' }"
+        :to="{ name: 'task' }"
         :class="{ active: $route.name === 'todo' }"
       >
         Задачи
@@ -38,6 +38,7 @@
     &-router {
       font-size: 15px;
       text-decoration: none;
+      color: #333;
       cursor: pointer;
     }
 

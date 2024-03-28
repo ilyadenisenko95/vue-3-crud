@@ -57,7 +57,7 @@ const openDeleteItemDialog =(todo) => {
       <RouterLink
         class="task__fix-text"
         @click.stop
-        :to="{ name: 'tasksdetails' }"
+        :to="{ name: 'taskdetails', params: { id: todo.id } }"
       >
         Редактировать
       </RouterLink>
