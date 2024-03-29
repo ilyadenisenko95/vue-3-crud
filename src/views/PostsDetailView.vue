@@ -1,7 +1,8 @@
 <script setup>
-import {fetchPosts} from '@/api/posts.js';
+import {fetchPost} from '@/api/posts.js';
 import {useCounter} from '@/stores/counter';
 import {ref, onMounted} from 'vue';
+import { useRoute } from 'vue-router';
 
 const isPostLoading = ref(false);
 
@@ -13,7 +14,14 @@ onMounted(async () => {
 });
 
 const post = ref([]);
-const counter = useCounter();
+
+const route = useRoute();
+
+const loadPost = async () => {
+  const myPost = await fetchPost(route.params.id);
+  post.value = myPost;
+};
+loadPost();
 
 
 
@@ -28,7 +36,7 @@ const counter = useCounter();
   >
     <h2 class="posts-detail__title">{{ post.title }}</h2>
     <p class="posts-detail__text">
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem obcaecati quidem rerum fugiat placeat, excepturi dolorem vero cupiditate assumenda cumque pariatur ad nostrum delectus, doloribus eaque recusandae.
+      {{ post.body }}
     </p>
     <div class="posts-detail__id">user id: {{ $route.params.id }}</div>
   </div>
