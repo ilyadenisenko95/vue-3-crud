@@ -4,6 +4,8 @@ import { ref } from 'vue';
 
 const counter = useCounter();
 
+
+
 </script>
 
 
@@ -12,7 +14,7 @@ const counter = useCounter();
   <div class="todos-detail">
     <el-input
       class="todos-detail__input"
-      v-model="input"
+      v-model="counter.todoName"
       placeholder=""
     />
     <el-checkbox
