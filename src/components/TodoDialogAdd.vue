@@ -1,9 +1,9 @@
 <script setup>
-import { useCounter } from '@/stores/counter';
+import { useTodoStore } from '@/stores/todo';
 import { ref } from 'vue';
 
 
-const counter = useCounter();
+const todoStore = useTodoStore();
 const isHasName = ref(true);
 
 // создание новой задачи
@@ -11,7 +11,7 @@ const isFavirite = ref(true);
 const inputName = ref('');
 const addTask = () => {
   if(inputName.value.length > 0){
-    counter.addTodo({
+    todoStore.addTodo({
       id: Date.now(),
       title: inputName.value,
       isDone: false,
@@ -81,44 +81,43 @@ defineExpose({ openDialogCreate });
 </template>
 
 <style lang="scss" scoped>
-  input {
-    box-sizing: border-box;
-    width: 100%;
-    height: 32px;
-    padding: 8px 11px;
-    font-size: 14px;
-    line-height: 16px;
-    font-weight: 400;
-    color: rgb(168 171 178);
-    border: 1px solid rgb(220 223 230);
-    border-radius: 4px;
-  }
+input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 32px;
+  padding: 8px 11px;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
+  color: rgb(168 171 178);
+  border: 1px solid rgb(220 223 230);
+  border-radius: 4px;
+}
 
-  .el-checkbox {
-    box-sizing: border-box;
-    width: 100%;
-    height: 32px;
-    margin-top: 16px;
-    margin-bottom: 40px;
-    padding: 8px 11px;
-    font-size: 14px;
-    line-height: 14px;
-    font-weight: 400;
-    color:#606266;
-    border: 1px solid rgb(220 223 230);
-    border-radius: 4px;
-  }
+.el-checkbox {
+  box-sizing: border-box;
+  width: 100%;
+  height: 32px;
+  margin-top: 16px;
+  margin-bottom: 40px;
+  padding: 8px 11px;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 400;
+  color:#606266;
+  border: 1px solid rgb(220 223 230);
+  border-radius: 4px;
+}
 
-  span {
-    display: flex;
-    justify-content: left;
-    margin-bottom: 8.5px;
-    font-size: 14px;
-    line-height: 16.1px;
-    font-weight: 400;
-    color: red;
-
-  }
+span {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 8.5px;
+  font-size: 14px;
+  line-height: 16.1px;
+  font-weight: 400;
+  color: red;
+}
 </style>
 
 

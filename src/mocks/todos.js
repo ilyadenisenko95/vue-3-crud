@@ -1,22 +1,9 @@
-export const FILTER_OPTIONS = [
-  {
-    key: 'isDone',
-    label: 'Выполнено',
-    value: false,
-  },
-  {
-    key: 'isFavorite',
-    label: 'Избранное',
-    value: false,
-  },
-];
-
 const todosMock = [
   {
     id: 4,
     title: 'Проверить почту',
     isDone: false,
-    isFavorite: false,
+    isFavorite: true,
   },
   {
     id: 3,

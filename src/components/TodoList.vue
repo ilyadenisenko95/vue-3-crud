@@ -1,11 +1,11 @@
 <script setup>
 import TodoDialogDelete from '@/components/TodoDialogDelete.vue';
-import { useCounter } from '@/stores/counter';
+import { useTodoStore } from '@/stores/todo';
 import { ElMessageBox } from 'element-plus';
 import { ref } from 'vue';
 
 
-const counter = useCounter();
+const todoStore = useTodoStore();
 
 defineProps({
   todo: {
@@ -15,8 +15,6 @@ defineProps({
   },
 });
 
-
-
 // Взаимодействие с модальным окном удаления
 
 const todoDialogDelete = ref(null);
@@ -24,10 +22,16 @@ const openDeleteItemDialog =(todo) => {
   todoDialogDelete.value.openDialog(todo);
 };
 
-</script>
 
+</script>
+<!--
+    :class="{ 'task--done': todo.isDone }" -->
 <template>
-  <div class="page-layout__task task" @click="counter.changePostDone(todo.id)">
+  <div
+    class="task"
+    :class="[ todo.isDone && 'task--done' ]"
+    @click="todoStore.changePostDone(todo.id)"
+  >
     <div class="task__top">
       <h2
         v-if="!todo.isDone"
@@ -40,7 +44,7 @@ const openDeleteItemDialog =(todo) => {
       >
         {{ todo.title }}
       </h2>
-      <div class="task__status" @click.stop="counter.changeFavorite(todo.id)">
+      <div class="task__status" @click.stop="todoStore.changeFavorite(todo.id)">
         <img
           v-if="!todo.isFavorite"
           src="../assets/icons/star.svg"
@@ -72,7 +76,7 @@ const openDeleteItemDialog =(todo) => {
   </div>
   <TodoDialogDelete
     ref="todoDialogDelete"
-    @deletePost="counter.deleteTodos(todo.id)"
+    @deletePost="todoStore.deleteTodos(todo.id)"
   />
 </template>
 
@@ -80,13 +84,28 @@ const openDeleteItemDialog =(todo) => {
 <style lang="scss" scoped>
 .task {
   position: relative;
-  width: 500px;
+  max-width: 500px;
   min-height: 116px;
   margin: 20px auto;
   margin-right: auto;
   margin-left: auto;
   padding: 17px;
   border: 1px solid rgb(170 170 170);
+
+  &:hover {
+    box-shadow: 0 0 20px 2px rgb(100 100 111 / 0.15);
+    translate: 0 -2px;
+    transition: 300ms;
+  }
+
+  &:focus {
+    border: 2px solid rgb(0 0 0);
+
+  }
+
+  &--done {
+    background-color: lightcoral;
+  }
 
   &__top {
     display: flex;

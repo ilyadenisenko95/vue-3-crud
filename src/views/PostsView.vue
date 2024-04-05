@@ -1,72 +1,109 @@
 <script setup>
-import { fetchPosts } from '@/api/posts.js';
+import { fetchPosts, POSTS_PER_PAGE } from '@/api/posts.js';
+import { sleep } from '@/components/helpers/helpers.js';
 import PostList from '@/components/PostList.vue';
-import { useCounter } from '@/stores/counter';
 import { onMounted, ref } from 'vue';
-const counter = useCounter();
-
 
 const posts = ref([]);
 const isPostsLoading = ref(false);
 onMounted(async () => {
   isPostsLoading.value = true;
   setTimeout(async () => {
-    posts.value = await fetchPosts(0, 4);
+    posts.value = await fetchPosts(0, POSTS_PER_PAGE);
     isPostsLoading.value = false;
   }, 500);
 });
 
 const delayButton= ref(false);
-let postStartNumber = 4;
-let postEndNumber = 8;
+let postStartNumber = POSTS_PER_PAGE;
+let postEndNumber = POSTS_PER_PAGE * 2;
 const postPage = ref(2);
 const loadPosts = async () => {
   isPostsLoading.value = true;
   delayButton.value = true;
-  setTimeout(async () => {
-    const loadPost =  await fetchPosts(postStartNumber, postEndNumber);
-    posts.value = [...posts.value, ...loadPost];
-    postStartNumber += 4;
-    postEndNumber += 4;
-    postPage.value += 1;
-    delayButton.value = false;
-    isPostsLoading.value = false;
-  }, 500);
+  const loadPost =  await fetchPosts(postStartNumber, postEndNumber);
+  await sleep(500);
+  posts.value = [...posts.value, ...loadPost];
+  postStartNumber += POSTS_PER_PAGE;
+  postEndNumber += POSTS_PER_PAGE;
+  postPage.value += 1;
+  delayButton.value = false;
+  isPostsLoading.value = false;
 };
-
-
-
 </script>
 
 <template>
-  <h1>Получение списка всех постов</h1>
-  <div>
-    <PostList
-      :posts="posts"
-    />
-    <el-skeleton v-if="isPostsLoading" :rows="5" animated />
+  <div class="container">
+    <h1>Получение списка всех постов</h1>
+    <div class="posts-page__posts posts">
+      <PostList :posts="posts" />
+      <template v-for="skeleton in POSTS_PER_PAGE" :key="skeleton">
+        <SkeletonItem
+          class="posts-page__skeleton"
+          v-if="isPostsLoading"
+        />
+
+        <el-skeleton
+          class="skeleton"
+          v-if="isPostsLoading"
+          :loading="loading"
+          animated
+        >
+          <template #template>
+            <div class="skeleton__body">
+              <el-skeleton-item variant="h3" />
+              <div class="skeleton__description" style="height: 16px; margin-top: 9px;">
+                <el-skeleton-item variant="text" style=" width: 95%; margin-top: 8px" />
+                <el-skeleton-item variant="text" style="width: 90%; margin-top: 8px; " />
+                <el-skeleton-item variant="text" style=" width: 30%; margin-top: 8px; " />
+              </div>
+              <el-skeleton-item variant="text" style="width: 12%; margin-top: 60px; margin-bottom: 19px;  margin-left: 87%;" />
+            </div>
+          </template>
+        </el-skeleton>
+      </template>
+    </div>
+    <el-button
+      type="primary"
+      :loading="delayButton"
+      @click="loadPosts"
+    >
+      Загрузить страницу {{ postPage }}
+    </el-button>
   </div>
-  <el-button
-    :loading="delayButton"
-    @click="loadPosts"
-    type="primary"
-  >
-    Загрузить страницу {{ postPage }}
-  </el-button>
 </template>
 
-
 <style lang="scss" scoped>
-  div {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.skeleton {
+  width: 49%;
+
+  // padding-top: 20px;
+
+  // &__body {
+  //   padding: 14px;
+  // }
+
+  // &__description {
+  //   width: 90%;
+  //   height: 25px;
+  // }
+}
+
+.el-button {
+  display: block;
+  margin: 20px auto;
+}
+
+@media (width <= 500px) {
+  .skeleton {
     width: 100%;
-
-
-    .el-button {
-      display: block;
-      margin: 20px auto;
-    }
   }
+}
 </style>

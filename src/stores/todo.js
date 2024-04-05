@@ -1,34 +1,10 @@
+import { todosMock } from '@/mocks/todos';
 import { defineStore } from 'pinia';
 // import { ref, computed } from 'vue';
 
-export const useCounter = defineStore('counter', {
+export const useTodoStore = defineStore('todo', {
   state: () => ({
-    todos: [
-      {
-        id: 4,
-        title: 'Проверить почту',
-        isDone: false,
-        isFavorite: true,
-      },
-      {
-        id: 3,
-        title: 'Сделать кофе',
-        isDone: true,
-        isFavorite: true,
-      },
-      {
-        id: 2,
-        title: 'Почистить зубы',
-        isDone: true,
-        isFavorite: false,
-      },
-      {
-        id: 1,
-        title: 'Проснуться',
-        isDone: true,
-        isFavorite: false,
-      },
-    ],
+    todos: [ ...todosMock ],
     isDoneFilter: false,
     isFavoriteFilter: false,
   }),

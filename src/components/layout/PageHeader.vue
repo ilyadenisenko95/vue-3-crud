@@ -5,63 +5,79 @@
 
 <template>
   <div class="header">
-    <h3>Vue 3 CRUD app</h3>
-    <ul>
-      <router-link
-        class="header-router"
-        :to="{ name: 'post' }"
-        :class="{ active: $route.name === 'post' }"
-      >
-        Посты
-      </router-link>
-      <router-link
-        class="header-router"
-        :to="{ name: 'task' }"
-        :class="{ active: $route.name === 'todo' }"
-      >
-        Задачи
-      </router-link>
-    </ul>
+    <div class="header__menu">
+      <h3 class="header__title">Vue 3 CRUD app</h3>
+      <ul class="header__list list">
+        <router-link
+          class="list__item"
+          :to="{ name: 'post' }"
+          :class="{ active: $route.name === 'post' }"
+        >
+          Посты
+        </router-link>
+        <router-link
+          class="list__item"
+          :to="{ name: 'task' }"
+          :class="{ active: $route.name === 'task' }"
+        >
+          Задачи
+        </router-link>
+      </ul>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-  .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.header {
   height: 50px;
-  padding: 0 220px;
   background: rgb(255 255 255);
   box-shadow: 0 2px 15px 0 rgb(100 100 111 / 0.2);
 
-    &-router {
-      font-size: 15px;
-      text-decoration: none;
-      color: #333;
-      cursor: pointer;
-    }
-
-    .active {
-      color: rgb(0 0 139);
-      border-bottom: 1px solid rgb(0 0 139);
-    }
+  &__menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    max-width: 1064px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0 32px;
   }
 
-  h3 {
-      font-size: 15px;
-    }
+  &__title {
+    font-size: 15px;
+  }
 
-  ul {
+  &__router:hover {
+    color: rgb(0 0 139);
+  }
+
+  .active {
+    text-decoration: none;
+    color: rgb(0 0 139);
+    border-bottom: 1px solid rgb(0 0 139)
+  }
+}
+
+.list {
     display: flex;
     justify-content: space-between;
     list-style-type: none;
     min-width: 128px;
     padding: 0;
+
+  &__item {
+    font-size: 15px;
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
   }
+}
 
-  li:hover {
-    color: rgb(0 0 139);
-    }
+@media (width <= 768px) {
+  .header__menu {
+    padding: 0 20px;
 
+  }
+}
 </style>
