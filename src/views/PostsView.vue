@@ -39,7 +39,7 @@ const loadPosts = async () => {
       <PostList :posts="posts" />
       <template v-for="skeleton in POSTS_PER_PAGE" :key="skeleton">
         <SkeletonItem
-          class="posts-page__skeleton"
+          class="skeleton"
           v-if="isPostsLoading"
         />
 
@@ -82,18 +82,17 @@ const loadPosts = async () => {
 }
 
 .skeleton {
-  width: 49%;
+  width: 49%;// вынести 
+  padding-top: 20px;
 
-  // padding-top: 20px;
+  &__body {
+    padding: 14px;
+  }
 
-  // &__body {
-  //   padding: 14px;
-  // }
-
-  // &__description {
-  //   width: 90%;
-  //   height: 25px;
-  // }
+  &__description {
+    width: 90%;
+    height: 25px;
+  }
 }
 
 .el-button {

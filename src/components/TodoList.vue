@@ -33,14 +33,10 @@ const openDeleteItemDialog =(todo) => {
     @click="todoStore.changePostDone(todo.id)"
   >
     <div class="task__top">
-      <h2
-        v-if="!todo.isDone"
-      >
+      <h2 v-if="!todo.isDone">
         {{ todo.title }}
       </h2>
-      <h2
-        v-else
-        style="color:#90EE90;"
+      <h2 v-else style="color:#90EE90;"
       >
         {{ todo.title }}
       </h2>

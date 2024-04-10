@@ -61,19 +61,6 @@ loadPost();
 </template>
 
 <style lang="scss" scoped>
-.skeleton {
-  // width: 49%;
-  padding-top: 20px;
-
-  &__body {
-    padding: 14px;
-  }
-
-  &__description {
-    width: 90%;
-    height: 25px;
-  }
-}
 
 .posts-detail {
 &__title {
