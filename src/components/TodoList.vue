@@ -33,10 +33,9 @@ const openDeleteItemDialog =(todo) => {
     @click="todoStore.changePostDone(todo.id)"
   >
     <div class="task__top">
-      <h2 v-if="!todo.isDone">
-        {{ todo.title }}
-      </h2>
-      <h2 v-else style="color:#90EE90;"
+      <h2
+        class="task__title"
+        :class="[ todo.isDone && 'task__title--done' ]"
       >
         {{ todo.title }}
       </h2>
@@ -58,6 +57,7 @@ const openDeleteItemDialog =(todo) => {
         class="task__fix-text"
         @click.stop
         :to="{ name: 'taskdetails', params: { id: todo.id } }"
+        :class="[ todo.isDone && 'task__fix-text--done' ]"
       >
         Редактировать
       </RouterLink>
@@ -86,21 +86,32 @@ const openDeleteItemDialog =(todo) => {
   margin-right: auto;
   margin-left: auto;
   padding: 17px;
-  border: 1px solid rgb(170 170 170);
+  border: 1px solid rgb(144 238 144);
 
   &:hover {
+    border: 1px solid rgb(0 0 0);
     box-shadow: 0 0 20px 2px rgb(100 100 111 / 0.15);
-    translate: 0 -2px;
     transition: 300ms;
+    translate: 0 -2px;
   }
 
   &:focus {
     border: 2px solid rgb(0 0 0);
+  }
 
+  &__title {
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 700;
+    color: #90EE90;
+  }
+
+  &__title--done {
+    color: #999;
   }
 
   &--done {
-    background-color: lightcoral;
+    border: 1px solid rgb(119 119 119);
   }
 
   &__top {
@@ -129,6 +140,10 @@ const openDeleteItemDialog =(todo) => {
     text-decoration: none;
     color: rgb(51 51 51);
     cursor: pointer;
+  }
+
+  &__fix-text--done {
+    color: #999;
   }
 
   &__fix-text:hover {

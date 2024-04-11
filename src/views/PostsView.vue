@@ -11,7 +11,7 @@ onMounted(async () => {
   setTimeout(async () => {
     posts.value = await fetchPosts(0, POSTS_PER_PAGE);
     isPostsLoading.value = false;
-  }, 500);
+  }, 50000);
 });
 
 const delayButton= ref(false);
@@ -22,7 +22,7 @@ const loadPosts = async () => {
   isPostsLoading.value = true;
   delayButton.value = true;
   const loadPost =  await fetchPosts(postStartNumber, postEndNumber);
-  await sleep(500);
+  // await sleep(500);
   posts.value = [...posts.value, ...loadPost];
   postStartNumber += POSTS_PER_PAGE;
   postEndNumber += POSTS_PER_PAGE;
@@ -38,10 +38,10 @@ const loadPosts = async () => {
     <div class="posts-page__posts posts">
       <PostList :posts="posts" />
       <template v-for="skeleton in POSTS_PER_PAGE" :key="skeleton">
-        <SkeletonItem
+        <!-- <SkeletonItem
           class="skeleton"
           v-if="isPostsLoading"
-        />
+        /> -->
 
         <el-skeleton
           class="skeleton"
@@ -82,7 +82,7 @@ const loadPosts = async () => {
 }
 
 .skeleton {
-  width: 49%;// вынести 
+  width: 49%;// вынести
   padding-top: 20px;
 
   &__body {

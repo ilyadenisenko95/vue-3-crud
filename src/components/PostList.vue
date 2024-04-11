@@ -38,8 +38,9 @@ width: 49%;
 margin-bottom: 20px;
 
   &:hover {
-    margin-top: 10px;
     box-shadow: 0 0 20px 2px rgb(100 100 111 / 0.15);
+    transition: 300ms;
+    translate: 0 -2px;
   }
 
   &__link {
