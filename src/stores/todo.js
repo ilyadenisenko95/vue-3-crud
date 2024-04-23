@@ -1,6 +1,5 @@
 import { todosMock } from '@/mocks/todos';
 import { defineStore } from 'pinia';
-// import { ref, computed } from 'vue';
 
 export const useTodoStore = defineStore('todo', {
   state: () => ({
@@ -12,7 +11,6 @@ export const useTodoStore = defineStore('todo', {
     filteredTodos() {
 
       if (this.isDoneFilter & this.isFavoriteFilter) {
-        // return this.todos.filter((el) => el.isDone && el.isFavorite);
         return this.todos.filter((el) => {
           return el.isDone && el.isFavorite;
         });
@@ -25,7 +23,6 @@ export const useTodoStore = defineStore('todo', {
       if (this.isFavoriteFilter) {
         return this.todos.filter((el) => el.isFavorite);
       }
-
       return this.todos;
 
     },

@@ -4,7 +4,6 @@ import { useTodoStore } from '@/stores/todo';
 import { ElMessageBox } from 'element-plus';
 import { ref } from 'vue';
 
-
 const todoStore = useTodoStore();
 
 defineProps({
@@ -16,16 +15,13 @@ defineProps({
 });
 
 // Взаимодействие с модальным окном удаления
-
 const todoDialogDelete = ref(null);
 const openDeleteItemDialog =(todo) => {
   todoDialogDelete.value.openDialog(todo);
 };
 
-
 </script>
-<!--
-    :class="{ 'task--done': todo.isDone }" -->
+
 <template>
   <div
     class="task"

@@ -47,7 +47,6 @@ const openCreateItemDialog = (todo) => {
   </div>
 </template>
 
-
 <style lang="scss" scoped>
 .task-filter {
   display: flex;
@@ -82,7 +81,5 @@ const openCreateItemDialog = (todo) => {
 .el-button {
   margin-top: 5px;
 }
-
 }
-
 </style>

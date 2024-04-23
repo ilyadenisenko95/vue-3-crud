@@ -2,7 +2,6 @@
 import { useTodoStore } from '@/stores/todo';
 import { ref } from 'vue';
 
-
 const todoStore = useTodoStore();
 const isHasName = ref(true);
 
@@ -33,7 +32,6 @@ const openDialogCreate = () => {
   inputName.value ='';
   isFavirite.value = false;
   isHasName.value = true;
-
 };
 
 defineExpose({ openDialogCreate });

@@ -22,8 +22,6 @@ const loadPost = async () => {
 };
 loadPost();
 
-
-
 </script>
 
 <template>
