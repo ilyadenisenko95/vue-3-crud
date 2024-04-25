@@ -67,9 +67,5 @@ const loadPosts = async () => {
   margin: 20px auto;
 }
 
-@media (width <= 500px) {
-  .skeleton {
-    width: 100%;
-  }
-}
+
 </style>

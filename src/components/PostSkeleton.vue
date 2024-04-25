@@ -34,4 +34,10 @@ import { POSTS_PER_PAGE } from '@/api/posts.js';
     height: 25px;
   }
 }
+
+@media (width <= 500px) {
+  .skeleton {
+    width: 100%;
+  }
+}
 </style>
