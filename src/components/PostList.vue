@@ -17,9 +17,7 @@ defineProps({
       class="post__link"
       :to="{ name: 'postsdetails', params: { id: post.id } }"
     >
-      <div
-        class="post__info"
-      >
+      <div class="post__info">
         <h2 class="post__info-title">{{ post.title }}</h2>
         <p class="post__info-text">
           {{ post.body }}
@@ -32,10 +30,10 @@ defineProps({
 
 <style lang="scss" scoped>
 .post {
-position: relative;
-display: flex;
-width: 49%;
-margin-bottom: 20px;
+  position: relative;
+  display: flex;
+  width: 49%;
+  margin-bottom: 20px;
 
   &:hover {
     box-shadow: 0 0 20px 2px rgb(100 100 111 / 0.15);
@@ -44,8 +42,8 @@ margin-bottom: 20px;
   }
 
   &__link {
-  text-decoration: none;
-  color: #000;
+    text-decoration: none;
+    color: #000;
   }
 
   &__info {
@@ -56,9 +54,9 @@ margin-bottom: 20px;
   }
 
   &__info-title {
-  font-size: 17px;
-  line-height: 22px;
-  font-weight: 600;
+    font-size: 17px;
+    line-height: 22px;
+    font-weight: 600;
   }
 
   &__info-id {
@@ -79,11 +77,8 @@ margin-bottom: 20px;
 }
 
 @media (width <= 500px) {
-.post {
-  width: 100%;
+  .post {
+    width: 100%;
+  }
 }
-}
-
-
-
 </style>

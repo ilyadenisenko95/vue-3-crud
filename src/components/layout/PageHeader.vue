@@ -1,8 +1,3 @@
-<script setup>
-
-
-</script>
-
 <template>
   <div class="header">
     <div class="header__menu">
@@ -10,15 +5,15 @@
       <ul class="header__list list">
         <router-link
           class="list__item"
-          :to="{ name: 'post' }"
           :class="{ active: $route.name === 'post' }"
+          :to="{ name: 'post' }"
         >
           Посты
         </router-link>
         <router-link
           class="list__item"
-          :to="{ name: 'task' }"
           :class="{ active: $route.name === 'task' }"
+          :to="{ name: 'task' }"
         >
           Задачи
         </router-link>

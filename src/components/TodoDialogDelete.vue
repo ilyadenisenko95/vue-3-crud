@@ -1,6 +1,7 @@
 <script setup>
-defineEmits(['deletePost']);
 import { ref } from 'vue';
+
+defineEmits(['deletePost']);
 
 const isConfirmDeleteOpen = ref(false);
 const deleteDialogItem = ref({});

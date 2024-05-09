@@ -1,6 +1,6 @@
 <script setup>
 import TodoDialogAdd from '@/components/TodoDialogAdd.vue';
-import TodoList from '@/components/TodoList.vue';
+import TodoItem from '@/components/TodoItem.vue';
 import { useTodoStore } from '@/stores/todo';
 import { ref } from 'vue';
 
@@ -37,7 +37,7 @@ const openCreateItemDialog = (todo) => {
         Добавить задачу
       </el-button>
     </div>
-    <TodoList
+    <TodoItem
       v-for="todo in todoStore.filteredTodos"
       :key="todo.id"
       :todo="todo"
@@ -67,19 +67,19 @@ const openCreateItemDialog = (todo) => {
 }
 
 @media (width <= 480px) {
-.task-filter {
-  flex-wrap: wrap;
-  justify-content: center;
-  height: 100px;
+  .task-filter {
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 100px;
 
-  &__change {
-    width: 100%;
-    text-align: center
+    &__change {
+      width: 100%;
+      text-align: center
+    }
   }
-}
 
-.el-button {
-  margin-top: 5px;
-}
+  .el-button {
+    margin-top: 5px;
+  }
 }
 </style>

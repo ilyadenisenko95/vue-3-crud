@@ -16,17 +16,21 @@ title.value = detailTodo.title;
 isDone.value = detailTodo.isDone;
 isFavorite.value = detailTodo.isFavorite;
 
-
+const isHasText = ref(true);
 const router = useRouter();
 const updateTodo = () => {
   detailTodo.title = title.value;
   detailTodo.isDone = isDone.value;
   detailTodo.isFavorite = isFavorite.value;
-  router.push({ name: 'task' });
-  ElNotification({
-    title: 'Задача успешно редактирована!',
-    type: 'success',
-  });
+  if(title.value.length > 0){
+    router.push({ name: 'task' });
+    ElNotification({
+      title: 'Задача успешно редактирована!',
+      type: 'success',
+    });
+  } else {
+    isHasText.value = false;
+  }
 };
 
 const deleteTodo = () => {
@@ -39,6 +43,9 @@ const deleteTodo = () => {
   <div class="container">
     <h1>Детальная страница задачи</h1>
     <div class="todos-detail">
+      <span class="todos-detail__error" v-if="!isHasText">
+        Пожалуйста, введите название!
+      </span>
       <el-input
         class="todos-detail__input"
         v-model="title"
@@ -71,6 +78,16 @@ const deleteTodo = () => {
 .todos-detail {
   &__input {
     margin-bottom: 16px;
+  }
+
+  &__error {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 8.5px;
+    font-size: 14px;
+    line-height: 16.1px;
+    font-weight: 400;
+    color: red;
   }
 
   &__checkbox {

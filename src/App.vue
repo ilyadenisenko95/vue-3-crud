@@ -5,14 +5,8 @@ import PageHeader from './components/layout/PageHeader.vue';
 
 <template>
   <PageHeader />
-  <main class="page-layout">
+  <main>
     <RouterView />
   </main>
   <PageFooter />
 </template>
-
-<style lang="scss" scoped>
-.page-layout {
-
-}
-</style>

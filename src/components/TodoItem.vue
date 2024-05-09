@@ -1,10 +1,7 @@
 <script setup>
 import TodoDialogDelete from '@/components/TodoDialogDelete.vue';
 import { useTodoStore } from '@/stores/todo';
-import { ElMessageBox } from 'element-plus';
 import { ref } from 'vue';
-
-const todoStore = useTodoStore();
 
 defineProps({
   todo: {
@@ -14,12 +11,13 @@ defineProps({
   },
 });
 
+const todoStore = useTodoStore();
+
 // Взаимодействие с модальным окном удаления
 const todoDialogDelete = ref(null);
 const openDeleteItemDialog =(todo) => {
   todoDialogDelete.value.openDialog(todo);
 };
-
 </script>
 
 <template>
@@ -51,16 +49,15 @@ const openDeleteItemDialog =(todo) => {
     <div class="task__fix">
       <RouterLink
         class="task__fix-text"
-        @click.stop
-        :to="{ name: 'taskdetails', params: { id: todo.id } }"
         :class="[ todo.isDone && 'task__fix-text--done' ]"
+        :to="{ name: 'taskdetails', params: { id: todo.id } }"
+        @click.stop
       >
         Редактировать
       </RouterLink>
-
       <el-button
-        @click.stop="openDeleteItemDialog"
         type="danger"
+        @click.stop="openDeleteItemDialog"
       >
         Удалить
       </el-button>
@@ -82,7 +79,7 @@ const openDeleteItemDialog =(todo) => {
   margin-right: auto;
   margin-left: auto;
   padding: 17px;
-  border: 1px solid rgb(144 238 144);
+  border: 1px solid rgb(119 119 119);
 
   &:hover {
     border: 1px solid rgb(0 0 0);
@@ -95,19 +92,19 @@ const openDeleteItemDialog =(todo) => {
     border: 2px solid rgb(0 0 0);
   }
 
+  &--done {
+    border: 1px solid rgb(144 238 144);
+  }
+
   &__title {
     font-size: 18px;
     line-height: 22px;
     font-weight: 700;
-    color: #90EE90;
-  }
-
-  &__title--done {
     color: #999;
   }
 
-  &--done {
-    border: 1px solid rgb(119 119 119);
+  &__title--done {
+    color: #90EE90;
   }
 
   &__top {
@@ -145,11 +142,6 @@ const openDeleteItemDialog =(todo) => {
   &__fix-text:hover {
     border-bottom: 1px solid #000;
   }
-}
-
-h2 {
-  font-size: 18px;
-  font-weight: 700;
 }
 
 img {

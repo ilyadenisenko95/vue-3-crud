@@ -7,30 +7,23 @@ export const useTodoStore = defineStore('todo', {
     isDoneFilter: false,
     isFavoriteFilter: false,
   }),
+
   getters: {
     filteredTodos() {
-
-      if (this.isDoneFilter & this.isFavoriteFilter) {
-        return this.todos.filter((el) => {
-          return el.isDone && el.isFavorite;
-        });
-      }
-
+      let filteredTodos = this.todos;
       if (this.isDoneFilter) {
-        return this.todos.filter((el) => el.isDone);
+        filteredTodos = filteredTodos.filter(todo => todo.isDone);
       }
-
       if (this.isFavoriteFilter) {
-        return this.todos.filter((el) => el.isFavorite);
+        filteredTodos = filteredTodos.filter(todo => todo.isFavorite);
       }
-      return this.todos;
-
+      return filteredTodos;
     },
   },
 
   actions: {
     deleteTodos(id) {
-      this.todos = this.todos.filter(el => el.id !== id);
+      this.todos = this.todos.filter(todo => todo.id !== id);
       ElNotification({
         title: 'Задача успешно удалена!',
         type: 'success',
@@ -38,32 +31,17 @@ export const useTodoStore = defineStore('todo', {
     },
 
     changeFavorite(id) {
-      const todo = this.todos.find((el) => el.id === id);
-      if(todo.isFavorite === false){
-        todo.isFavorite = true;
-      }
-      else{
-        todo.isFavorite = false;
-      }
+      const todo = this.todos.find((todo) => todo.id === id);
+      todo.isFavorite = !todo.isFavorite;
     },
 
     changePostDone(id) {
-      const todoDone = this.todos.find((el) => el.id === id);
-      if(todoDone.isDone === false){
-        todoDone.isDone = true;
-      }
-      else{
-        todoDone.isDone = false;
-      }
+      const todo = this.todos.find((todo) => todo.id === id);
+      todo.isDone = !todo.isDone;
     },
 
-    // создание новой задачи
-    addTodo(el) {
-      this.todos.unshift(el);
+    addTodo(todo) {
+      this.todos.unshift(todo);
     },
-
-
   },
-
-
 });

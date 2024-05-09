@@ -1,6 +1,3 @@
-<script setup>
-</script>
-
 <template>
   <div class="footer">
     <div class="footer__info">
@@ -34,9 +31,8 @@
 }
 
 @media (width <= 768px) {
-.footer__info {
-  padding: 0 20px;
-
-}
+  .footer__info {
+    padding: 0 20px;
+  }
 }
 </style>

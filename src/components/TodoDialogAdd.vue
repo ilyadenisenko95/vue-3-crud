@@ -6,7 +6,7 @@ const todoStore = useTodoStore();
 const isHasName = ref(true);
 
 // создание новой задачи
-const isFavirite = ref(true);
+const isFavorite = ref(true);
 const inputName = ref('');
 const addTask = () => {
   if(inputName.value.length > 0){
@@ -14,10 +14,10 @@ const addTask = () => {
       id: Date.now(),
       title: inputName.value,
       isDone: false,
-      isFavorite: isFavirite.value,
+      isFavorite: isFavorite.value,
     });
     inputName.value = '';
-    isFavirite.value = false;
+    isFavorite.value = false;
     isConfirmCreateOpen.value = false;
     ElNotification({
       title: 'Задача успешно добавлена!',
@@ -29,17 +29,16 @@ const addTask = () => {
   }
 };
 
-const isConfirmCreateOpen = ref(false);
 
+const isConfirmCreateOpen = ref(false);
 const openDialogCreate = () => {
   isConfirmCreateOpen.value = true;
   inputName.value ='';
-  isFavirite.value = false;
+  isFavorite.value = false;
   isHasName.value = true;
 };
 
 defineExpose({ openDialogCreate });
-
 </script>
 
 <template>
@@ -49,20 +48,19 @@ defineExpose({ openDialogCreate });
     v-model="isConfirmCreateOpen"
   >
     <template #footer>
-      <span
-        v-if="!isHasName"
-        class="dialog-footer__text"
-      >Пожалуйста, введите название!</span>
+      <span class="error-text" v-if="!isHasName">
+        Пожалуйста, введите название!
+      </span>
       <input
-        v-model="inputName"
-        class="modal__add-input"
+        class="input-text"
         type="text"
         placeholder="Название"
+        v-model="inputName"
       >
       <el-checkbox
-        v-model="isFavirite"
-        class="modal__add-checkbox"
+        class="checkbox"
         label="Избранное"
+        v-model="isFavorite"
       />
       <div class="dialog-footer">
         <el-button
@@ -72,8 +70,8 @@ defineExpose({ openDialogCreate });
           Создать
         </el-button>
         <el-button
-          @click="isConfirmCreateOpen = false"
           type="cancel"
+          @click="isConfirmCreateOpen = false"
         >
           Отмена
         </el-button>
@@ -83,7 +81,7 @@ defineExpose({ openDialogCreate });
 </template>
 
 <style lang="scss" scoped>
-input {
+.input-text {
   box-sizing: border-box;
   width: 100%;
   height: 32px;
@@ -96,7 +94,7 @@ input {
   border-radius: 4px;
 }
 
-.el-checkbox {
+.checkbox {
   box-sizing: border-box;
   width: 100%;
   height: 32px;
@@ -111,7 +109,7 @@ input {
   border-radius: 4px;
 }
 
-span {
+.error-text {
   display: flex;
   justify-content: left;
   margin-bottom: 8.5px;

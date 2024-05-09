@@ -1,27 +1,23 @@
 <script setup>
-import {fetchPost} from '@/api/posts.js';
-import {ref, onMounted} from 'vue';
+import { fetchPost } from '@/api/posts.js';
+import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
 const isPostLoading = ref(false);
-
-onMounted(async () => {
+onMounted(() => {
   isPostLoading.value = true;
-  setTimeout(async () => {
+  setTimeout(() => {
     isPostLoading.value = false;
   }, 500);
 });
 
 const post = ref([]);
-
 const route = useRoute();
-
 const loadPost = async () => {
   const myPost = await fetchPost(route.params.id);
   post.value = myPost;
 };
 loadPost();
-
 </script>
 
 <template>
@@ -61,38 +57,38 @@ loadPost();
 <style lang="scss" scoped>
 
 .posts-detail {
-&__title {
-  font-size: 21px;
-  line-height: 26px;
-  font-weight: 700;
-}
+  &__title {
+    font-size: 21px;
+    line-height: 26px;
+    font-weight: 700;
+  }
 
-&__text {
-  margin: 20px 0;
-  font-size: 20px;
-  line-height: 24px;
-  font-weight: 400;
-}
+  &__text {
+    margin: 20px 0;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 400;
+  }
 
   &__id {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 20px;
-  font-size: 16px;
-  line-height: 18px;
-  font-weight: 400;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 400;
   }
 }
 
 @media (width <= 500px) {
-.posts-detail {
-  &__title {
-    font-size: 18px;
-  }
+  .posts-detail {
+    &__title {
+      font-size: 18px;
+    }
 
-  &__text {
-    font-size: 16px;
+    &__text {
+      font-size: 16px;
+    }
   }
-}
 }
 </style>
