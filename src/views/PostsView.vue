@@ -66,4 +66,5 @@ const loadPosts = async () => {
   display: block;
   margin: 20px auto;
 }
+
 </style>
