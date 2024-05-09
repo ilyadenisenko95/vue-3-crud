@@ -19,6 +19,10 @@ const addTask = () => {
     inputName.value = '';
     isFavirite.value = false;
     isConfirmCreateOpen.value = false;
+    ElNotification({
+      title: 'Задача успешно добавлена!',
+      type: 'success',
+    });
   }
   else{
     isHasName.value = false;

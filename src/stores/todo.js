@@ -31,6 +31,10 @@ export const useTodoStore = defineStore('todo', {
   actions: {
     deleteTodos(id) {
       this.todos = this.todos.filter(el => el.id !== id);
+      ElNotification({
+        title: 'Задача успешно удалена!',
+        type: 'success',
+      });
     },
 
     changeFavorite(id) {

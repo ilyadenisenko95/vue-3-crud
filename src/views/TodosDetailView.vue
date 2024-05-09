@@ -23,6 +23,10 @@ const updateTodo = () => {
   detailTodo.isDone = isDone.value;
   detailTodo.isFavorite = isFavorite.value;
   router.push({ name: 'task' });
+  ElNotification({
+    title: 'Задача успешно редактирована!',
+    type: 'success',
+  });
 };
 
 const deleteTodo = () => {
