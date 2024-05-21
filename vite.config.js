@@ -16,6 +16,7 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
   ],
+  base: '/vue-3-crud/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
