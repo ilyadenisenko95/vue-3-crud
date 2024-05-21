@@ -5,7 +5,7 @@ const router = createRouter({
   history: createWebHashHistory('/vue-3-crud'),
   routes: [
     {
-      path: '/',
+      path: '/vue-3-crud',
       name: 'post',
       component: PostsView,
     },
