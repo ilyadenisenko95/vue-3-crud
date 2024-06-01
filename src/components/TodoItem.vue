@@ -36,7 +36,7 @@ const openDeleteItemDialog =(todo) => {
       <div class="task__status" @click.stop="todoStore.changeFavorite(todo.id)">
         <img
           v-if="!todo.isFavorite"
-          src="../assets/icons/star.svg"
+          src="../assets/icons/Star.svg"
           alt="star"
         >
         <img
